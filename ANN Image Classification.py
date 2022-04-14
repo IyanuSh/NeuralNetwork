@@ -74,3 +74,5 @@ train_cat = process_folder(folder=pathlib.Path.cwd().joinpath('data/train/cat'))
 train_dog = process_folder(folder=pathlib.Path.cwd().joinpath('data/train/dog'))
 train_set = pd.concat([train_cat, train_dog], axis=0)
 #test
+#hello
+
