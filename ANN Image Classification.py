@@ -48,32 +48,3 @@ def process_image(img_path: str) -> np.array:
 tst_img = process_image(img_path='/home/kingkonzy/Downloads/archive/PetImages/Dog/10012.jpg')
 Result = Image.fromarray(np.uint8(tst_img * 255).reshape((96, 96)))
 #Result.show()
-
-def process_folder(folder: pathlib.PosixPath) -> pd.DataFrame:
-    # We'll store the images here
-    processed = []
-    
-    # For every image in the directory
-    for img in folder.iterdir():
-        # Ensure JPG
-        if img.suffix == '.jpg':
-            # Two images failed for whatever reason, so let's just ignore them
-            try:
-                processed.append(process_image(img_path=str(img)))
-            except Exception as _:
-                continue
-           
-    # Convert to pd.DataFrame
-    processed = pd.DataFrame(processed)
-    # Add a class column - dog or a cat
-    processed['class'] = folder.parts[-1]
-    
-    return processed
-
-train_cat = process_folder(folder=pathlib.Path.cwd().joinpath('data/train/cat'))
-train_dog = process_folder(folder=pathlib.Path.cwd().joinpath('data/train/dog'))
-train_set = pd.concat([train_cat, train_dog], axis=0)
-#test
-#hello
-#ck's changes
-#ck's second change
